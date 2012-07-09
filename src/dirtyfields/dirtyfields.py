@@ -28,7 +28,7 @@ class DirtyFieldsMixin(object):
         return bool(self.get_dirty_fields())
 
     def save(self, *args, **kwargs):
-        if django.version >= (1,5,0):
+        if django.VERSION >= (1,5,0):
             kwargs['update_fields'] = self.get_dirty_fields()
         
         return super(DirtyFieldsMixin, self).save(*args, **kwargs)
