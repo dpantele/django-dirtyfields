@@ -1,6 +1,6 @@
 # Adapted from http://stackoverflow.com/questions/110803/dirty-fields-in-django
 from django.db.models.signals import post_save
-
+import django
 
 class DirtyFieldsMixin(object):
     def __init__(self, *args, **kwargs):
@@ -28,7 +28,9 @@ class DirtyFieldsMixin(object):
         return bool(self.get_dirty_fields())
 
     def save(self, *args, **kwargs):
-        kwargs['update_fields'] = self.get_dirty_fields()
+        if django.version >= (1,5,0)
+            kwargs['update_fields'] = self.get_dirty_fields()
+        
         return super(DirtyFieldsMixin, self).save(*args, **kwargs)
 
 
